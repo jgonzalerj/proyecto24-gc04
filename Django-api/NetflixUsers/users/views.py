@@ -73,13 +73,13 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
-        id = self.get_object().id
-        url = f"{WATCHED_EPISODES_URL}?user_id={id}"
+        user_id = self.get_object().id
+        url = f"{WATCHED_EPISODES_URL}?user_id={user_id}"
         destroy_related_watched_contents(
             "Episode", "Episodes", "episode_id", url
         )
-        url = f"{WATCHED_MOVIES_URL}?user_id={id}"
+        url = f"{WATCHED_MOVIES_URL}?user_id={user_id}"
         destroy_related_watched_contents("Movie", "Movies", "movie_id", url)
-        url = f"{WATCHED_SERIES_URL}?user_id={id}"
+        url = f"{WATCHED_SERIES_URL}?user_id={user_id}"
         destroy_related_watched_contents("Series", "Series", "series_id", url)
         return super().destroy(request, *args, **kwargs)

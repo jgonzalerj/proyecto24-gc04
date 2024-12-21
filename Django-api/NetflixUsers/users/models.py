@@ -52,8 +52,7 @@ class User(models.Model):
         help_text=(
             "The ids for the user's favorite genres; "
             "may be null if no genres are defined."
-        ),
-        null=True
+        )
     )
     id = models.AutoField(primary_key=True)
     name = models.CharField(help_text="The user's full name.", max_length=255)
